@@ -89,3 +89,15 @@ plt.rcParams['text.color'] = '#d4d4d4'
 
 if __name__ == "__main__":
     run_analysis()
+# --- Fragment kodu do wstawienia w sekcji rysowania ---
+# Znajdujemy punkt najgłębszej inwersji
+min_date = df['Spread'].idxmin()
+min_value = df['Spread'].min()
+
+
+if min_value < 0:
+    ax.annotate(f'Max Inwersja: {min_value:.2f} p.p.',
+                xy=(min_date, min_value), # Gdzie wskazuje strzałka
+                xytext=(min_date, min_value - 0.5), # Gdzie jest tekst
+                arrowprops=dict(facecolor='#FF3333', shrink=0.05), 
+                color='white', fontweight='bold', ha='center')
