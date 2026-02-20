@@ -39,6 +39,12 @@ def run_analysis():
     wibor = simplify(raw_wibor)
     bonds = simplify(raw_bonds)
 
+plt.rcParams['figure.facecolor'] = '#212121'
+plt.rcParams['axes.facecolor'] = '#2b2b2b'   
+plt.rcParams['axes.edgecolor'] = '#d4d4d4'   
+plt.rcParams['text.color'] = '#d4d4d4'       
+    
+
     df = pd.merge(wibor, bonds, on="Date", suffixes=("_w", "_b")).dropna()
     
     if df.empty:
