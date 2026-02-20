@@ -11,7 +11,7 @@ Głównym celem modelu jest identyfikacja okresów inwersji krzywej dochodowośc
 * **Robust Data Pipeline**: Zaawansowany mechanizm pobierania danych z API Stooq z wbudowaną obsługą błędów.
 
 ## 📊 Wizualizacja Modelu
-![WIBOR Analysis Pro](wibor_plot_pro.png)
+<img width="1782" height="1043" alt="wibor_plot_pro" src="https://github.com/user-attachments/assets/f6beb973-73f3-4552-b268-f8462e873a7e" />
 *Powyższy wykres przedstawia analizę spreadu z automatycznie wyznaczonym punktem krytycznym oraz zaznaczonymi obszarami inwersji.*
 
 ## 💡 Rozwiązane Problemy Techniczne (Quant Case Study)
