@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 
 def get_stooq_data(ticker):
     url = f"https://stooq.com/q/d/l/?s={ticker}&i=d"
-    return pd.read_csv(url, index_col='Data', parse_dates=True)['Zamkniecie']
+    # Używamy index_col=0, aby uniknąć problemu z nazwą kolumny 'Data'/'Date'
+    df = pd.read_csv(url, index_col=0, parse_dates=True)
+    return df.iloc[:, 3] # Wybieramy czwartą kolumnę (Cena zamknięcia)
 
 wibor = get_stooq_data('PLOPLN3M')
 bonds = get_stooq_data('10PLY.B')
