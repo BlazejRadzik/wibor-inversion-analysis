@@ -13,7 +13,6 @@ plt.rcParams['xtick.color'] = '#d4d4d4'
 plt.rcParams['ytick.color'] = '#d4d4d4'
 plt.rcParams['text.color'] = '#d4d4d4'
 plt.rcParams['grid.color'] = '#444444'
-
 def get_data(ticker):
     url = f"https://stooq.com/q/d/l/?s={ticker}&i=d"
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
@@ -25,11 +24,9 @@ def get_data(ticker):
     except Exception:
         pass
     return pd.Series()
-
 wibor = get_data('PLOPLN3M')
 bonds = get_data('10PLY.B')
 data_source = "Stooq Data (Live)"
-
 if wibor.empty or bonds.empty:
     data_source = "Synthetic Demo Data"
     dates = pd.date_range(end=pd.Timestamp.now(), periods=1000, freq='D')
@@ -39,19 +36,14 @@ if wibor.empty or bonds.empty:
 else:
     df = pd.DataFrame({'WIBOR': wibor, 'BONDS': bonds}).dropna()
     df['Spread'] = df['BONDS'] - df['WIBOR']
-
 df['Inversion'] = df['Spread'] < 0
-
 fig, ax = plt.subplots(figsize=(12, 7))
-
 ax.plot(df.index, df['Spread'], label='Spread (10Y - 3M)', color='#00BFFF', linewidth=2)
 ax.axhline(0, color='#FF3333', linestyle='--', linewidth=1.5, alpha=0.8)
 ax.fill_between(df.index, df['Spread'], 0, where=df['Inversion'], 
                 color='#FF0000', alpha=0.4, label='Inversion Area')
-
 min_date = df['Spread'].idxmin()
 min_value = df['Spread'].min()
-
 if min_value < 0:
     ax.annotate(f'Max Inversion: {min_value:.2f} p.p.',
                 xy=(min_date, min_value),
